@@ -4,4 +4,5 @@ module com.uygar {
 
     opens com.uygar to javafx.fxml;
     exports com.uygar;
+    exports com.uygar.controller;
 }
