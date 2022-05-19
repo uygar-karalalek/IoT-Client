@@ -9,7 +9,8 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="452.0" spacing="20.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="452.0" spacing="20.0"
+      fx:controller="com.uygar.controller.LoginController" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label id="title" alignment="CENTER" prefHeight="41.0" prefWidth="303.0" text="Login as IoT - Observe user">
          <VBox.margin>
@@ -20,7 +21,7 @@
       <TextField fx:id="usernameField" alignment="CENTER" />
       <Label text="Password" />
       <PasswordField fx:id="passwordField" alignment="CENTER" />
-      <Button mnemonicParsing="false" onAction="#onLogin" text="Login" />
+      <Button id="loginBtn" mnemonicParsing="false" onAction="#onLogin" text="Login" />
       <VBox alignment="CENTER" prefHeight="58.0" prefWidth="372.0">
          <children>
             <Label alignment="CENTER" prefHeight="13.0" prefWidth="331.0" text="Note:" wrapText="true">
