@@ -1,5 +1,6 @@
 package com.uygar.controller;
 
+import com.uygar.model.observable.ObservableDevice;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
@@ -17,6 +18,8 @@ public class DeviceModifyController {
     public VBox add;
     public ChoiceBox typeBox;
     public Slider spinner;
+
+    public ObservableDevice device;
 
     public void onCreate(ActionEvent event) {
     }

@@ -3,6 +3,7 @@ package com.uygar.controller;
 import com.uygar.App;
 import com.uygar.App.ParentControllerPair;
 import com.uygar.model.observable.ObservableDevice;
+import com.uygar.view_model.DeviceButtonData;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -14,16 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static com.uygar.App.deviceRepository;
@@ -62,39 +59,9 @@ public class HomeController implements Initializable {
         });
     }
 
-    class DeviceButtonData {
-        ObservableDevice device;
-        boolean selected;
-
-        public DeviceButtonData(ObservableDevice device, boolean selected) {
-            this.device = device;
-            this.selected = selected;
-        }
-    }
-
     private Button buildDeviceButton(ObservableDevice observableDevice) {
         Button button = new Button(observableDevice.getName());
-        button.prefWidthProperty().bind(flow.widthProperty().divide(3.25));
-        String imageName = observableDevice.getType().toLowerCase();
-        Image image = new Image(App.class.getResourceAsStream("images/" + imageName + ".png"), 50.0, 50.0, true, true);
-        button.setGraphic(new ImageView(image));
-        button.getStyleClass().add("deviceButton");
-        button.setPrefHeight(80);
-        button.setUserData(new DeviceButtonData(observableDevice, false));
 
-        button.setOnMouseClicked(mouseEvent -> {
-            if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                if (!((DeviceButtonData) button.getUserData()).selected) {
-                    button.setStyle("-fx-background-color: blue;");
-                    ((DeviceButtonData) button.getUserData()).selected = true;
-                } else {
-                    button.setStyle("");
-                    ((DeviceButtonData) button.getUserData()).selected = false;
-                }
-            } else {
-                System.out.println("entering ");
-            }
-        });
         return button;
     }
 
