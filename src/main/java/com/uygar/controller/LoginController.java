@@ -16,7 +16,6 @@ public class LoginController {
         App.applicationProperties.putProperty("username", username);
         App.applicationProperties.putProperty("password", password);
 
-
     }
 
 }

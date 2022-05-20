@@ -5,13 +5,12 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0"
-          prefWidth="762.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.uygar.controller.HomeController">
+<GridPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="762.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uygar.controller.HomeController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="380.0" />
   </columnConstraints>
@@ -22,7 +21,10 @@
   </rowConstraints>
    <children>
       <Label id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="648.0" text="Welcome to IoT - Client" GridPane.hgrow="ALWAYS" />
-      <ScrollPane fx:id="scrollPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+      <ScrollPane fx:id="scrollPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+         <content>
+            <FlowPane fx:id="flow" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWrapLength="0.0" />
+         </content></ScrollPane>
       <HBox id="actionsBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.rowIndex="1">
          <children>
             <HBox alignment="CENTER" spacing="10.0" HBox.hgrow="NEVER">

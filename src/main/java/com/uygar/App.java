@@ -2,11 +2,13 @@ package com.uygar;
 
 import com.github.kevinsawicki.http.HttpRequest;
 import com.uygar.properties.ApplicationProperties;
+import com.uygar.repo.DeviceRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -14,7 +16,34 @@ import java.util.Objects;
 
 public class App extends Application {
 
+    public static class ParentControllerPair<PARENT extends Parent, CONTROLLER> {
+        private PARENT parent;
+        private CONTROLLER controller;
+
+        public ParentControllerPair(PARENT parent, CONTROLLER controller) {
+            this.parent = parent;
+            this.controller = controller;
+        }
+
+        public PARENT getParent() {
+            return parent;
+        }
+
+        public void setParent(PARENT parent) {
+            this.parent = parent;
+        }
+
+        public CONTROLLER getController() {
+            return controller;
+        }
+
+        public void setController(CONTROLLER controller) {
+            this.controller = controller;
+        }
+    }
+
     public static final ApplicationProperties applicationProperties = new ApplicationProperties();
+    public static final DeviceRepository deviceRepository = new DeviceRepository();
     public static int userId = -1;
 
     @Override
@@ -31,19 +60,38 @@ public class App extends Application {
         }
 
         Scene scene;
-        if (userId <= 0) scene = new Scene(loadFXML("login", "login.css"), 450, 400);
-        else scene = new Scene(loadFXML("home", "main.css"));
+        if (userId <= 0) {
+            ParentControllerPair<Parent, Object> login = getParentControllerPair("login", "login.css");
+            scene = new Scene(login.getParent(), 450, 400);
+        } else {
+            ParentControllerPair<Parent, Object> home = getParentControllerPair("home", "main.css");
+            scene = new Scene(home.getParent());
+        }
 
         stage.setScene(scene);
         stage.show();
     }
 
-    public static Parent loadFXML(String fxml, String stylePath) throws IOException {
+    public static <PARENT extends Parent> PARENT getParent(String fxml, String stylePath) throws IOException {
+        ParentControllerPair<PARENT, Object> parentControllerPair = App.getParentControllerPair(fxml, stylePath);
+        return parentControllerPair.getParent();
+    }
+
+    public static <CONTROLLER> CONTROLLER getController(String fxml, String stylePath) throws IOException {
+        ParentControllerPair<Parent, CONTROLLER> parentControllerPair = App.getParentControllerPair(fxml, stylePath);
+        return parentControllerPair.getController();
+    }
+
+    public static <PARENT extends
+            Parent, CONTROLLER> ParentControllerPair<PARENT, CONTROLLER> getParentControllerPair(String fxml, String stylePath) throws
+            IOException {
         InputStream resourceAsStream = App.class.getResourceAsStream("fxml/" + fxml + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(resourceAsStream);
-        root.getStylesheets().add(Objects.requireNonNull(App.class.getResource("css/" + stylePath)).toExternalForm());
-        return root;
+        PARENT parent = fxmlLoader.load(resourceAsStream);
+        parent.getStylesheets().add(Objects.requireNonNull(App.class.getResource("css/" + stylePath)).toExternalForm());
+        CONTROLLER controller = fxmlLoader.getController();
+
+        return new ParentControllerPair<>(parent, controller);
     }
 
     public static void main(String[] args) {
