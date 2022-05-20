@@ -4,7 +4,6 @@ import com.uygar.App;
 import com.uygar.App.ParentControllerPair;
 import com.uygar.controller.DeviceModifyController;
 import com.uygar.model.observable.ObservableDevice;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.springframework.boot.SpringBootConfiguration;
 
 import java.io.IOException;
 
@@ -25,6 +23,7 @@ public class DeviceButton extends Button {
 
     public DeviceButton(ObservableDevice obsDevice, FlowPane flow) {
         this.device = obsDevice;
+        this.setText(obsDevice.getName());
         this.prefWidthProperty().bind(flow.widthProperty().divide(3.25));
         String imageName = obsDevice.getType().toLowerCase();
         Image image = new Image(App.class.getResourceAsStream("images/" + imageName + ".png"), 50.0, 50.0, true, true);

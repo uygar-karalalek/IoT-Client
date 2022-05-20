@@ -4,6 +4,7 @@ open module com.uygar {
     requires http.request;
     requires org.xerial.sqlitejdbc;
     requires spring.core;
+    requires spring.context;
     requires spring.web;
     requires java.sql;
     requires spring.boot;
@@ -11,6 +12,12 @@ open module com.uygar {
     requires spring.beans;
     requires spring.boot.starter.web;
     requires spring.boot.starter.json;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.annotation;
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.datatype.jdk8;
+    requires com.fasterxml.jackson.datatype.jsr310;
+    requires com.fasterxml.jackson.module.paramnames;
     requires spring.boot.starter.logging;
     requires spring.boot.starter.tomcat;
     requires spring.aop;
@@ -18,5 +25,6 @@ open module com.uygar {
 
     exports com.uygar;
     exports com.uygar.properties;
+    exports com.uygar.model.observable;
     exports com.uygar.controller;
 }

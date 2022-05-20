@@ -11,6 +11,16 @@ public class Device {
     private String type;
     private ArrayList<Sensor> sensors;
 
+    private int userId;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public String getUuid() {
         return uuid;
     }
@@ -43,10 +53,11 @@ public class Device {
         this.sensors = sensors;
     }
 
-    public Device(String uuid, String name, String type, ArrayList<Sensor> sensors) {
+    public Device(String uuid, String name, String type, ArrayList<Sensor> sensors, int userId) {
         this.uuid = uuid;
         this.name = name;
         this.type = type;
         this.sensors = sensors;
+        this.userId = userId;
     }
 }

@@ -3,6 +3,7 @@ package com.uygar.controller;
 import com.uygar.App;
 import com.uygar.App.ParentControllerPair;
 import com.uygar.model.observable.ObservableDevice;
+import com.uygar.view_model.DeviceButton;
 import com.uygar.view_model.DeviceButtonData;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -42,14 +43,10 @@ public class HomeController implements Initializable {
         searchField.setOnAction(this::inputChanged);
 
         devices.addListener((ListChangeListener<? super ObservableDevice>) change -> {
-            while (change.next()) {
-                if (change.wasAdded())
-                    change.getAddedSubList().forEach(observableDevice
-                            -> flow.getChildren().add(buildDeviceButton(observableDevice)));
-            }
+            while (change.next()) if (change.wasAdded()) change.getAddedSubList().forEach(observableDevice -> flow.getChildren().add(new DeviceButton(observableDevice, flow)));
         });
 
-        App.deviceRepository.getDevices().forEach(device -> {
+        App.deviceRepository.getDevices(App.userId).forEach(device -> {
             ObservableDevice observableDevice = new ObservableDevice(
                     device.getUuid(),
                     device.getName(),
@@ -57,12 +54,6 @@ public class HomeController implements Initializable {
             );
             devices.add(observableDevice);
         });
-    }
-
-    private Button buildDeviceButton(ObservableDevice observableDevice) {
-        Button button = new Button(observableDevice.getName());
-
-        return button;
     }
 
     @FXML

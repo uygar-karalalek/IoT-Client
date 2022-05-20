@@ -20,8 +20,9 @@ public class DeviceAddController {
     ObservableList<ObservableDevice> devices;
 
     public void onCreateDevice() {
-        Device device = new Device(UUID.randomUUID().toString(), nameField.getText(), typeField.getText(), new ArrayList<>());
-        App.deviceRepository.createDevice(device);
+        Device device = new Device(UUID.randomUUID().toString(), nameField.getText(),
+                typeField.getText(), new ArrayList<>(), App.userId);
+        App.deviceRepository.createDevice(device, App.userId);
         devices.add(new ObservableDevice(device.getUuid(), device.getName(), device.getType()));
         stage.hide();
     }
