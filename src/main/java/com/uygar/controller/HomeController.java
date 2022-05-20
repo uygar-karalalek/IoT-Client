@@ -1,5 +1,6 @@
 package com.uygar.controller;
 
+import com.uygar.App;
 import com.uygar.App.ParentControllerPair;
 import com.uygar.model.observable.ObservableDevice;
 import javafx.collections.FXCollections;
@@ -36,6 +37,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         searchField.setOnAction(this::inputChanged);
+
         devices.addListener((ListChangeListener<? super ObservableDevice>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
@@ -43,13 +45,22 @@ public class HomeController implements Initializable {
                 }
             }
         });
+
+        App.deviceRepository.getDevices().forEach(device -> {
+            ObservableDevice observableDevice = new ObservableDevice(
+                    device.getUuid(),
+                    device.getName(),
+                    device.getType()
+            );
+            devices.add(observableDevice);
+        });
     }
 
     @FXML
     public void onAddDevice() {
         try {
-            ParentControllerPair<Parent, DeviceController> parentControllerPair =
-                    getParentControllerPair("device", "device.css");
+            ParentControllerPair<Parent, DeviceAddController> parentControllerPair =
+                    getParentControllerPair("device_add", "device_add.css");
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

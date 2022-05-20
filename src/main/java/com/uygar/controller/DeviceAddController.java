@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class DeviceController {
+public class DeviceAddController {
 
     public TextField nameField;
     public TextField typeField;

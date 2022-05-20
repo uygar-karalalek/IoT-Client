@@ -1,0 +1,24 @@
+#root {
+    -fx-background-color: radial-gradient(radius 200%, #52d2bf, #715ea9);
+}
+
+#title {
+    -fx-font-family: Galvji;
+    -fx-text-fill: #e5f3ff;
+    -fx-font-size: 15pt;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+}
+
+#addSensorTitle {
+    -fx-font-family: Galvji;
+    -fx-text-fill: #e5f3ff;
+    -fx-font-size: 18px;
+}
+
+.addSensorAttrs {
+    -fx-font-family: Galvji;
+    -fx-text-fill: #e5f3ff;
+    -fx-font-size: 14px;
+}

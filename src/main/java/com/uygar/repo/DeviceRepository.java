@@ -48,6 +48,27 @@ public class DeviceRepository {
         }
     }
 
+    public ArrayList<Device> getDevices() {
+        ArrayList<Device> devices = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM device");
+            ResultSet set = preparedStatement.executeQuery();
+            while (set.next()) {
+                Device device = new Device(
+                        set.getString("uuid"),
+                        set.getString("name"),
+                        set.getString("type"),
+                        getDeviceSensors(set.getString("uuid"))
+                );
+                devices.add(device);
+            }
+            return devices;
+        }
+        catch (SQLException exception) {exception.printStackTrace();}
+
+        return devices;
+    }
+
     public Device getDevice(String deviceUuid) {
         Device device = null;
         try {
