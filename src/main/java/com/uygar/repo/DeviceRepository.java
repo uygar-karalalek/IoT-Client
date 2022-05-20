@@ -69,6 +69,16 @@ public class DeviceRepository {
         return devices;
     }
 
+    public void removeDevice(String uuid) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM device WHERE uuid=?");
+            preparedStatement.setString(1,uuid);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Device getDevice(String deviceUuid) {
         Device device = null;
         try {

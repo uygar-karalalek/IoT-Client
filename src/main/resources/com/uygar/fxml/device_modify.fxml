@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
 <GridPane id="root" fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="727.0" stylesheets="@../css/device_modify.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uygar.controller.DeviceModifyController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,7 +29,15 @@
                </VBox.margin>
             </Label>
             <Label styleClass="addSensorAttrs" text="Type" />
-            <ChoiceBox fx:id="typeBox" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="219.0" />
+             <ChoiceBox fx:id="typeBox" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="219.0">
+                 <items>
+                     <FXCollections fx:factory="observableArrayList">
+                         <String fx:value="CO2 (ppm)" />
+                         <String fx:value="humidity (g/m3)" />
+                         <String fx:value="light (lux)" />
+                     </FXCollections>
+                 </items>
+             </ChoiceBox>
             <Label styleClass="addSensorAttrs" text="Initial value">
                <VBox.margin>
                   <Insets />
