@@ -56,7 +56,6 @@ public class DeviceModifyController {
     }
 
     public void onCreate() {
-
         String type = "";
         if (typeBox.getValue().toLowerCase().contains("co2"))
             type = "CO2";
@@ -66,8 +65,8 @@ public class DeviceModifyController {
             type = "humidity";
 
         Sensor deviceSensor = new Sensor(type, slider.getValue());
-        App.deviceRepository.createSensor(deviceSensor, device.getUuid());
+        int sensorId = App.deviceRepository.createSensor(deviceSensor, device.getUuid());
 
-        sensors.add(new ObservableSensor(deviceSensor.getId(), type, deviceSensor.getValue()));
+        sensors.add(new ObservableSensor(sensorId, type, deviceSensor.getValue()));
     }
 }

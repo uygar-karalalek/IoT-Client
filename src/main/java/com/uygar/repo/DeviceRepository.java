@@ -60,7 +60,7 @@ public class DeviceRepository {
         }
     }
 
-    public void createSensor(Sensor sensor, String devUuid) {
+    public int createSensor(Sensor sensor, String devUuid) {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO sensor VALUES(?, ?, ?, ?)");
@@ -69,10 +69,18 @@ public class DeviceRepository {
             preparedStatement.setDouble(3, sensor.getValue());
             preparedStatement.setString(4, devUuid);
             preparedStatement.execute();
+
+            PreparedStatement max = connection.prepareStatement("SELECT MAX(id) FROM sensor WHERE device_uuid=?");
+            max.setString(1, devUuid);
+            ResultSet set = max.executeQuery();
+            if (set.next())
+                return set.getInt(1);
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return -1;
     }
 
     public ArrayList<Device> getDevices(int userId) {

@@ -5,13 +5,10 @@ import com.uygar.model.Sensor;
 import com.uygar.repo.DeviceRepository;
 import com.uygar.server.DeviceDto;
 import com.uygar.server.SensorDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
