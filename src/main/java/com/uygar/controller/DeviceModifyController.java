@@ -3,6 +3,7 @@ package com.uygar.controller;
 import com.uygar.model.observable.ObservableDevice;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.FlowPane;
@@ -20,6 +21,12 @@ public class DeviceModifyController {
     public Slider spinner;
 
     public ObservableDevice device;
+    public Label title;
+
+    public void setDevice(ObservableDevice device) {
+        this.device = device;
+        this.title.setText("Modify the device: " + device.getName());
+    }
 
     public void onCreate(ActionEvent event) {
     }

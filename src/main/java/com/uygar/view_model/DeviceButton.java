@@ -4,6 +4,7 @@ import com.uygar.App;
 import com.uygar.App.ParentControllerPair;
 import com.uygar.controller.DeviceModifyController;
 import com.uygar.model.observable.ObservableDevice;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,7 +38,7 @@ public class DeviceButton extends Button {
     public void onButtonClicked(MouseEvent event) {
         if (event.getButton() == MouseButton.SECONDARY) {
             if (!((DeviceButtonData) this.getUserData()).selected) {
-                this.setStyle("-fx-background-color: blue;");
+                this.setStyle("-fx-background-color: rgb(231,91,94);");
                 ((DeviceButtonData) this.getUserData()).selected = true;
             } else {
                 this.setStyle("");
@@ -50,11 +51,10 @@ public class DeviceButton extends Button {
     private void enterDevice() {
         Stage stage = new Stage();
         try {
-            ParentControllerPair<GridPane, DeviceModifyController> deviceModify = getParentControllerPair(
-                    "device_modify", "device_modify.css"
-            );
-            deviceModify.getController().device = this.device;
-            deviceModify.getParent();
+            ParentControllerPair<GridPane, DeviceModifyController> deviceModify = getParentControllerPair("device_modify", "device_modify.css");
+            deviceModify.getController().setDevice(this.device);
+            GridPane parent = deviceModify.getParent();
+            stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -19,11 +19,22 @@ public class DeviceRepository {
         }
     }
 
-    public ArrayList<Sensor> getDeviceSensors(String deviceUuid) {
+    public ArrayList<Sensor> getDeviceSensors(int userId, String key, String value) {
         ArrayList<Sensor> sensors = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM sensor WHERE device_uuid=? ");
+            PreparedStatement deviceUuidStmt = connection.prepareStatement("SELECT uuid FROM device WHERE user_id=? AND " + key + "=?");
+            deviceUuidStmt.setInt(1, userId);
+            deviceUuidStmt.setString(2,value);
+
+            String deviceUuid = "";
+            ResultSet stmtGetUuid = deviceUuidStmt.executeQuery();
+
+            if (stmtGetUuid.next())
+                deviceUuid = stmtGetUuid.getString("uuid");
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM sensor WHERE device_uuid=?");
             preparedStatement.setString(1, deviceUuid);
+
             ResultSet set = preparedStatement.executeQuery();
             while (set.next()) {
                 Sensor sensor = new Sensor(set.getString("type"), set.getDouble("value"));
@@ -59,14 +70,15 @@ public class DeviceRepository {
                         set.getString("uuid"),
                         set.getString("name"),
                         set.getString("type"),
-                        getDeviceSensors(set.getString("uuid")),
+                        getDeviceSensors(userId, "uuid", set.getString("uuid")),
                         set.getInt("user_id")
                 );
                 devices.add(device);
             }
             return devices;
+        } catch (SQLException exception) {
+            exception.printStackTrace();
         }
-        catch (SQLException exception) {exception.printStackTrace();}
 
         return devices;
     }
@@ -74,7 +86,7 @@ public class DeviceRepository {
     public void removeDevice(String uuid) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM device WHERE uuid=?");
-            preparedStatement.setString(1,uuid);
+            preparedStatement.setString(1, uuid);
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,7 +105,7 @@ public class DeviceRepository {
                         set.getString("uuid"),
                         set.getString("name"),
                         set.getString("type"),
-                        getDeviceSensors(deviceUuid),
+                        getDeviceSensors(userId, "uuid", deviceUuid),
                         set.getInt("user_id")
                 );
             }

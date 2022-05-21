@@ -15,7 +15,7 @@
     <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="149.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-      <Label id="title" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="93.0" prefWidth="727.0" text="Modify the device: {device}" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" />
+      <Label fx:id="title" id="title" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="93.0" prefWidth="727.0" text="Modify the device: {device}" GridPane.columnSpan="2" GridPane.hgrow="SOMETIMES" />
       <ScrollPane fx:id="sensorsScroll" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <content>
             <FlowPane fx:id="sensorsFlow" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="359.0" prefWidth="409.0" />
