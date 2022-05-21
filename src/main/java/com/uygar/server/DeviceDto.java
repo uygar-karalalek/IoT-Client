@@ -2,9 +2,7 @@ package com.uygar.server;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.uygar.model.Sensor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @JsonSerialize

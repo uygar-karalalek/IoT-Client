@@ -22,3 +22,14 @@
     -fx-text-fill: #e5f3ff;
     -fx-font-size: 14px;
 }
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+#flow {
+    -fx-background-color: transparent;
+}

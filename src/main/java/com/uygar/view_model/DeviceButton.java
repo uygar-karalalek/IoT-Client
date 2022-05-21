@@ -1,7 +1,7 @@
 package com.uygar.view_model;
 
 import com.uygar.App;
-import com.uygar.App.ParentControllerPair;
+import com.uygar.ParentControllerPair;
 import com.uygar.controller.DeviceModifyController;
 import com.uygar.model.observable.ObservableDevice;
 import javafx.scene.Scene;

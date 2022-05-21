@@ -1,6 +1,7 @@
 package com.uygar.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Device {
@@ -9,7 +10,7 @@ public class Device {
     private String name;
 
     private String type;
-    private ArrayList<Sensor> sensors;
+    private List<Sensor> sensors;
 
     private int userId;
 
@@ -45,15 +46,15 @@ public class Device {
         this.type = type;
     }
 
-    public ArrayList<Sensor> getSensors() {
+    public List<Sensor> getSensors() {
         return sensors;
     }
 
-    public void setSensors(ArrayList<Sensor> sensors) {
+    public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
 
-    public Device(String uuid, String name, String type, ArrayList<Sensor> sensors, int userId) {
+    public Device(String uuid, String name, String type, List<Sensor> sensors, int userId) {
         this.uuid = uuid;
         this.name = name;
         this.type = type;

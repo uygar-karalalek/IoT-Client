@@ -16,32 +16,6 @@ import java.util.Objects;
 
 public class App extends Application {
 
-    public static class ParentControllerPair<PARENT extends Parent, CONTROLLER> {
-        private PARENT parent;
-        private CONTROLLER controller;
-
-        public ParentControllerPair(PARENT parent, CONTROLLER controller) {
-            this.parent = parent;
-            this.controller = controller;
-        }
-
-        public PARENT getParent() {
-            return parent;
-        }
-
-        public void setParent(PARENT parent) {
-            this.parent = parent;
-        }
-
-        public CONTROLLER getController() {
-            return controller;
-        }
-
-        public void setController(CONTROLLER controller) {
-            this.controller = controller;
-        }
-    }
-
     public static final ApplicationProperties applicationProperties = new ApplicationProperties();
     public static final DeviceRepository deviceRepository = new DeviceRepository();
     public static int userId = -1;

@@ -1,7 +1,7 @@
 package com.uygar.controller;
 
 import com.uygar.App;
-import com.uygar.App.ParentControllerPair;
+import com.uygar.ParentControllerPair;
 import com.uygar.model.observable.ObservableDevice;
 import com.uygar.view_model.DeviceButton;
 import com.uygar.view_model.DeviceButtonData;

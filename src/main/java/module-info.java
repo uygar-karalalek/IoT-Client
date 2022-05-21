@@ -2,7 +2,7 @@ open module com.uygar {
     requires javafx.controls;
     requires javafx.fxml;
     requires http.request;
-    requires org.xerial.sqlitejdbc;
+    requires mysql.connector.java;
     requires spring.core;
     requires spring.context;
     requires spring.web;
