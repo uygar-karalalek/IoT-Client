@@ -15,6 +15,10 @@ public class ApplicationProperties extends Properties {
         }
     }
 
+    public String getClientEndPoint() {
+        return this.getProperty("clientEndPoint");
+    }
+
     public void putProperty(String propName, String propValue) {
         this.put(propName, propValue);
         try {

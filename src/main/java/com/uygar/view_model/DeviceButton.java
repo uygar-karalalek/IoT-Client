@@ -1,6 +1,6 @@
 package com.uygar.view_model;
 
-import com.uygar.App;
+import com.uygar.Application;
 import com.uygar.ParentControllerPair;
 import com.uygar.controller.DeviceModifyController;
 import com.uygar.model.observable.ObservableDevice;
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static com.uygar.App.getParentControllerPair;
+import static com.uygar.Application.getParentControllerPair;
 
 public class DeviceButton extends Button {
 
@@ -27,7 +27,7 @@ public class DeviceButton extends Button {
         this.setText(obsDevice.getName());
         this.prefWidthProperty().bind(flow.widthProperty().divide(3.25));
         String imageName = obsDevice.getType().toLowerCase();
-        Image image = new Image(App.class.getResourceAsStream("images/" + imageName + ".png"), 50.0, 50.0, true, true);
+        Image image = new Image(Application.class.getResourceAsStream("images/" + imageName + ".png"), 50.0, 50.0, true, true);
         this.setGraphic(new ImageView(image));
         this.getStyleClass().add("deviceButton");
         this.setPrefHeight(80);

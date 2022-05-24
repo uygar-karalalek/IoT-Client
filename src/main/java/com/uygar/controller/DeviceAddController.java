@@ -1,6 +1,5 @@
 package com.uygar.controller;
 
-import com.uygar.App;
 import com.uygar.model.Device;
 import com.uygar.model.observable.ObservableDevice;
 import javafx.collections.ObservableList;
@@ -10,7 +9,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class DeviceAddController {
+public class DeviceAddController extends Controller {
 
     public TextField nameField;
     public TextField typeField;
@@ -21,8 +20,8 @@ public class DeviceAddController {
 
     public void onCreateDevice() {
         Device device = new Device(UUID.randomUUID().toString(), nameField.getText(),
-                typeField.getText(), new ArrayList<>(), App.userId);
-        App.deviceRepository.createDevice(device, App.userId);
+                typeField.getText(), new ArrayList<>(), getUserId());
+        deviceRepository().createDevice(device, getUserId());
         devices.add(new ObservableDevice(device.getUuid(), device.getName(), device.getType()));
         stage.hide();
     }

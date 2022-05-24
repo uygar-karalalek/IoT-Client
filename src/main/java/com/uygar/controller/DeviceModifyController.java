@@ -1,6 +1,6 @@
 package com.uygar.controller;
 
-import com.uygar.App;
+import com.uygar.Application;
 import com.uygar.ParentControllerPair;
 import com.uygar.model.Sensor;
 import com.uygar.model.observable.ObservableDevice;
@@ -8,6 +8,7 @@ import com.uygar.model.observable.ObservableSensor;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -19,14 +20,19 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class DeviceModifyController {
+public class DeviceModifyController extends Controller {
 
-
+    @FXML
     public GridPane root;
+    @FXML
     public ScrollPane sensorsScroll;
+    @FXML
     public FlowPane sensorsFlow;
+    @FXML
     public VBox add;
+    @FXML
     public ChoiceBox<String> typeBox;
+    @FXML
     public Slider slider;
 
     public ObservableDevice device;
@@ -41,7 +47,7 @@ public class DeviceModifyController {
             while (change.next()) {
                 change.getAddedSubList().forEach(sensorObservable -> {
                     try {
-                        ParentControllerPair<Parent, DeviceSensorController> deviceSensor = App.getParentControllerPair("device_sensor", "device_sensor.css");
+                        ParentControllerPair<Parent, DeviceSensorController> deviceSensor = Application.getParentControllerPair("device_sensor", "device_sensor.css");
                         deviceSensor.getController().deviceUuid = device.getUuid();
                         deviceSensor.getController().setObservableSensor(sensorObservable);
                         sensorsFlow.getChildren().add(deviceSensor.getParent());
@@ -51,7 +57,7 @@ public class DeviceModifyController {
                 });
             }
         });
-        App.deviceRepository.getDeviceSensors(App.userId, "name", device.getName()).forEach(sensor -> this.sensors.add(
+        deviceRepository().getDeviceSensors(getUserId(), "name", device.getName()).forEach(sensor -> this.sensors.add(
                 new ObservableSensor(sensor.getId(), sensor.getType(), sensor.getValue())));
     }
 
@@ -65,7 +71,7 @@ public class DeviceModifyController {
             type = "humidity";
 
         Sensor deviceSensor = new Sensor(type, slider.getValue());
-        int sensorId = App.deviceRepository.createSensor(deviceSensor, device.getUuid());
+        int sensorId = deviceRepository().createSensor(deviceSensor, device.getUuid());
 
         sensors.add(new ObservableSensor(sensorId, type, deviceSensor.getValue()));
     }

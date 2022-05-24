@@ -28,8 +28,7 @@ public class DeviceMySqlRepository implements DeviceRepository {
             String deviceUuid = "";
             ResultSet stmtGetUuid = deviceUuidStmt.executeQuery();
 
-            if (stmtGetUuid.next())
-                deviceUuid = stmtGetUuid.getString("uuid");
+            if (stmtGetUuid.next()) deviceUuid = stmtGetUuid.getString("uuid");
 
             PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT * FROM sensor WHERE device_uuid=?");
             preparedStatement.setString(1, deviceUuid);
@@ -114,7 +113,7 @@ public class DeviceMySqlRepository implements DeviceRepository {
     }
 
     @Override
-    public void removeDevice(String uuid) {
+    public void removeByUuid(String uuid) {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM device WHERE uuid=?");
@@ -127,7 +126,7 @@ public class DeviceMySqlRepository implements DeviceRepository {
     }
 
     @Override
-    public Device getDevice(String deviceUuid, int userId) {
+    public Device findByUuidAndUserId(String deviceUuid, int userId) {
         Device device = null;
         try {
             Connection connection = getConnection();
@@ -151,18 +150,4 @@ public class DeviceMySqlRepository implements DeviceRepository {
         return device;
     }
 
-    @Override
-    public void updateSensor(Integer id, Double newVal) {
-        try {
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE sensor SET value=? WHERE id=?");
-            preparedStatement.setDouble(1, newVal);
-            preparedStatement.setInt(2, id);
-
-            preparedStatement.execute();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

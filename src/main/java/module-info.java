@@ -24,6 +24,7 @@ open module com.uygar {
     requires spring.boot.autoconfigure;
 
     exports com.uygar;
+    exports com.uygar.repo;
     exports com.uygar.server;
     exports com.uygar.properties;
     exports com.uygar.model.observable;

@@ -1,10 +1,9 @@
 package com.uygar.controller;
 
-import com.uygar.App;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class LoginController {
+public class LoginController extends Controller {
 
     public TextField usernameField;
     public PasswordField passwordField;
@@ -13,8 +12,8 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        App.applicationProperties.putProperty("username", username);
-        App.applicationProperties.putProperty("password", password);
+        appProperties().putProperty("username", username);
+        appProperties().putProperty("password", password);
 
     }
 

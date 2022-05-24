@@ -1,6 +1,5 @@
 package com.uygar.controller;
 
-import com.uygar.App;
 import com.uygar.ParentControllerPair;
 import com.uygar.model.observable.ObservableDevice;
 import com.uygar.view_model.DeviceButton;
@@ -24,10 +23,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.uygar.App.deviceRepository;
-import static com.uygar.App.getParentControllerPair;
+import static com.uygar.Application.getParentControllerPair;
 
-public class HomeController implements Initializable {
+public class HomeController extends Controller implements Initializable {
 
     @FXML
     public TextField searchField;
@@ -46,7 +44,7 @@ public class HomeController implements Initializable {
             while (change.next()) if (change.wasAdded()) change.getAddedSubList().forEach(observableDevice -> flow.getChildren().add(new DeviceButton(observableDevice, flow)));
         });
 
-        App.deviceRepository.getDevices(App.userId).forEach(device -> {
+        deviceRepository().getDevices(getUserId()).forEach(device -> {
             ObservableDevice observableDevice = new ObservableDevice(
                     device.getUuid(),
                     device.getName(),
@@ -68,6 +66,7 @@ public class HomeController implements Initializable {
 
             parentControllerPair.getController().setStage(stage);
             parentControllerPair.getController().setDevices(devices);
+            parentControllerPair.getController().setParentApplication(getParentApplication());
 
             stage.show();
         } catch (IOException e) {
@@ -82,7 +81,7 @@ public class HomeController implements Initializable {
             if (isButtonAndHasDataAssociated) {
                 DeviceButtonData deviceButtonData = (DeviceButtonData) node.getUserData();
                 if (deviceButtonData.selected) {
-                    deviceRepository.removeDevice(deviceButtonData.device.getUuid());
+                    deviceRepository().removeByUuid(deviceButtonData.device.getUuid());
                     devices.remove(deviceButtonData.device);
                     return true;
                 }

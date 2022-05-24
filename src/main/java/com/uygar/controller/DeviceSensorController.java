@@ -1,11 +1,12 @@
 package com.uygar.controller;
 
-import com.uygar.App;
+import com.uygar.Application;
 import com.uygar.model.observable.ObservableSensor;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
-public class DeviceSensorController {
+public class DeviceSensorController extends Controller {
 
     public Slider slider;
     public Label value;
@@ -18,7 +19,11 @@ public class DeviceSensorController {
         this.sensorType.setText(observableSensor.getType());
         this.slider.setValue(observableSensor.getValue());
         this.value.textProperty().bind(slider.valueProperty().asString().concat(" " + getTypeUnit(observableSensor.getType())));
-        this.slider.valueProperty().addListener((observableValue, oldVal, newVal) -> new Thread(() -> App.deviceRepository.updateSensor(observableSensor.getId(), (Double) newVal)).start());
+        this.slider.valueProperty().addListener(this::onSliderValueChanged);
+    }
+
+    public void onSliderValueChanged(ObservableValue<? extends Number> observableValue, Number oldVal, Number newVal) {
+        new Thread(() -> getDeviceSensorMySqlRepository().updateSensor(observableSensor.getId(), (Double) newVal)).start();
     }
 
     public String getTypeUnit(String type) {
