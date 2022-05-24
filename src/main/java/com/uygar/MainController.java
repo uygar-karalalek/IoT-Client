@@ -2,7 +2,7 @@ package com.uygar;
 
 import com.uygar.model.Device;
 import com.uygar.model.Sensor;
-import com.uygar.repo.DeviceRepository;
+import com.uygar.repo.DeviceMySqlRepository;
 import com.uygar.server.DeviceDto;
 import com.uygar.server.SensorDto;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 public class MainController {
 
-    DeviceRepository deviceRepository = new DeviceRepository();
+    DeviceMySqlRepository deviceRepository = new DeviceMySqlRepository();
 
     @PostMapping("createDevice/{userId}")
     public void createNewDevice(@RequestBody DeviceDto deviceDto, @PathVariable int userId) {

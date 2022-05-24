@@ -2,7 +2,7 @@ package com.uygar;
 
 import com.github.kevinsawicki.http.HttpRequest;
 import com.uygar.properties.ApplicationProperties;
-import com.uygar.repo.DeviceRepository;
+import com.uygar.repo.DeviceMySqlRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +17,7 @@ import java.util.Objects;
 public class App extends Application {
 
     public static final ApplicationProperties applicationProperties = new ApplicationProperties();
-    public static final DeviceRepository deviceRepository = new DeviceRepository();
+    public static final DeviceMySqlRepository deviceRepository = new DeviceMySqlRepository();
     public static int userId = -1;
 
     @Override
