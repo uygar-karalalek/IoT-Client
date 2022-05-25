@@ -1,7 +1,8 @@
-package com.uygar.repo;
+package com.uygar.repo.mysql;
 
 import com.uygar.model.Device;
 import com.uygar.model.Sensor;
+import com.uygar.repo.DeviceRepository;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,4 +1,7 @@
-package com.uygar.repo;
+package com.uygar.repo.mysql;
+
+import com.uygar.repo.DeviceSensorRepository;
+import com.uygar.repo.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

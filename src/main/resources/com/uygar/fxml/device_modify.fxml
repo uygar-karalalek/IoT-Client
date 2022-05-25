@@ -42,13 +42,6 @@
             </Label>
             <Label styleClass="addSensorAttrs" text="Type" />
              <ChoiceBox fx:id="typeBox" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="219.0">
-                 <items>
-                     <FXCollections fx:factory="observableArrayList">
-                         <String fx:value="CO2 (ppm)" />
-                         <String fx:value="humidity (g/m3)" />
-                         <String fx:value="light (lux)" />
-                     </FXCollections>
-                 </items>
              </ChoiceBox>
             <Label styleClass="addSensorAttrs" text="Initial value">
                <VBox.margin>

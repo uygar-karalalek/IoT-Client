@@ -8,8 +8,6 @@ import com.uygar.repo.DeviceSensorRepository;
 public abstract class Controller {
 
     private Application parentApplication;
-    private DeviceRepository deviceRepository;
-    private DeviceSensorRepository deviceSensorRepository;
 
     public void setParentApplication(Application parentApplication) {
         this.parentApplication = parentApplication;

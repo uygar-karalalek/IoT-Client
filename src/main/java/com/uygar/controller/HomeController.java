@@ -9,7 +9,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,12 +20,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import static com.uygar.Application.getParentControllerPair;
 
-public class HomeController extends Controller implements Initializable {
+public class HomeController extends Controller {
 
     @FXML
     public TextField searchField;
@@ -36,12 +33,12 @@ public class HomeController extends Controller implements Initializable {
 
     ObservableList<ObservableDevice> devices = FXCollections.observableArrayList();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void init() {
         searchField.setOnAction(this::inputChanged);
 
         devices.addListener((ListChangeListener<? super ObservableDevice>) change -> {
-            while (change.next()) if (change.wasAdded()) change.getAddedSubList().forEach(observableDevice -> flow.getChildren().add(new DeviceButton(observableDevice, flow)));
+            while (change.next()) if (change.wasAdded()) change.getAddedSubList().forEach(observableDevice ->
+                    flow.getChildren().add(new DeviceButton(observableDevice, flow, getParentApplication())));
         });
 
         deviceRepository().getDevices(getUserId()).forEach(device -> {
@@ -77,6 +74,7 @@ public class HomeController extends Controller implements Initializable {
     @FXML
     public void onRemoveSelected() {
         flow.getChildren().removeIf(node -> {
+            // First I want to make sure this is a button
             boolean isButtonAndHasDataAssociated = (node instanceof Button) && node.getUserData() != null;
             if (isButtonAndHasDataAssociated) {
                 DeviceButtonData deviceButtonData = (DeviceButtonData) node.getUserData();

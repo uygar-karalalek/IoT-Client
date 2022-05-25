@@ -2,7 +2,7 @@ package com.uygar;
 
 import com.uygar.model.Device;
 import com.uygar.model.Sensor;
-import com.uygar.repo.DeviceMySqlRepository;
+import com.uygar.repo.mysql.DeviceMySqlRepository;
 import com.uygar.server.DeviceDto;
 import com.uygar.server.SensorDto;
 import org.springframework.http.HttpStatus;

@@ -1,11 +1,12 @@
 package com.uygar;
 
 import com.github.kevinsawicki.http.HttpRequest;
+import com.uygar.controller.Controller;
 import com.uygar.controller.HomeController;
 import com.uygar.controller.LoginController;
 import com.uygar.properties.ApplicationProperties;
-import com.uygar.repo.DeviceMySqlRepository;
-import com.uygar.repo.DeviceSensorMySqlRepository;
+import com.uygar.repo.mysql.DeviceMySqlRepository;
+import com.uygar.repo.mysql.DeviceSensorMySqlRepository;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,6 +36,7 @@ public class Application extends javafx.application.Application {
         } else {
             ParentControllerPair<Parent, HomeController> home = getParentControllerPair("home", "main.css");
             home.getController().setParentApplication(this);
+            home.getController().init();
             scene = new Scene(home.getParent());
         }
 
@@ -55,9 +57,8 @@ public class Application extends javafx.application.Application {
         }
     }
 
-    public static <PARENT extends
-            Parent, CONTROLLER> ParentControllerPair<PARENT, CONTROLLER> getParentControllerPair(String fxml, String stylePath) throws
-            IOException {
+    public static <PARENT extends Parent, CONTROLLER extends Controller> ParentControllerPair<PARENT, CONTROLLER>
+    getParentControllerPair(String fxml, String stylePath) throws IOException {
         InputStream resourceAsStream = Application.class.getResourceAsStream("fxml/" + fxml + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
         PARENT parent = fxmlLoader.load(resourceAsStream);

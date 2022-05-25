@@ -1,5 +1,6 @@
 package com.uygar.model.observable;
 
+import com.uygar.model.SensorType;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,8 +29,12 @@ public class ObservableSensor {
         this.id.set(id);
     }
 
-    public String getType() {
+    public String getRawType() {
         return type.get();
+    }
+
+    public SensorType getType() {
+        return SensorType.valueOf(getRawType().toUpperCase());
     }
 
     public SimpleStringProperty typeProperty() {

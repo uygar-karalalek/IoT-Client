@@ -21,13 +21,18 @@ import static com.uygar.Application.getParentControllerPair;
 public class DeviceButton extends Button {
 
     private ObservableDevice device;
+    private Application parentApplication;
 
-    public DeviceButton(ObservableDevice obsDevice, FlowPane flow) {
+    public DeviceButton(ObservableDevice obsDevice, FlowPane flow, Application parentApplication) {
+        this.parentApplication = parentApplication;
+
         this.device = obsDevice;
         this.setText(obsDevice.getName());
         this.prefWidthProperty().bind(flow.widthProperty().divide(3.25));
+
         String imageName = obsDevice.getType().toLowerCase();
         Image image = new Image(Application.class.getResourceAsStream("images/" + imageName + ".png"), 50.0, 50.0, true, true);
+
         this.setGraphic(new ImageView(image));
         this.getStyleClass().add("deviceButton");
         this.setPrefHeight(80);
@@ -52,6 +57,7 @@ public class DeviceButton extends Button {
         Stage stage = new Stage();
         try {
             ParentControllerPair<GridPane, DeviceModifyController> deviceModify = getParentControllerPair("device_modify", "device_modify.css");
+            deviceModify.getController().setParentApplication(parentApplication);
             deviceModify.getController().setDevice(this.device);
             GridPane parent = deviceModify.getParent();
             stage.setScene(new Scene(parent));

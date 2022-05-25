@@ -16,7 +16,7 @@ public class ApplicationProperties extends Properties {
     }
 
     public String getClientEndPoint() {
-        return this.getProperty("clientEndPoint");
+        return this.getProperty("remoteEndPoint")+":"+this.getProperty("remotePort");
     }
 
     public void putProperty(String propName, String propValue) {

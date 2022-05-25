@@ -25,8 +25,10 @@ open module com.uygar {
 
     exports com.uygar;
     exports com.uygar.repo;
+    exports com.uygar.model;
     exports com.uygar.server;
     exports com.uygar.properties;
     exports com.uygar.model.observable;
     exports com.uygar.controller;
+    exports com.uygar.repo.mysql;
 }
