@@ -62,6 +62,26 @@
     -fx-font-weight: bolder;
 }
 
+#logoutBtn {
+    -fx-background-color: radial-gradient(radius 200%, #ff565a, #af8e8e);
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 0.4em;
+    -fx-background-radius: 0.4em;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bolder;
+}
+
+#logoutBtn:hover {
+    -fx-background-color: radial-gradient(radius 200%, #e75b5e, #c4ffff);
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 0.4em;
+    -fx-background-radius: 0.4em;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bolder;
+}
+
 #flow {
     -fx-background-color: #a7a7d9;
 }

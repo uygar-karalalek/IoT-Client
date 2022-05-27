@@ -32,9 +32,11 @@ public class Application extends javafx.application.Application {
         if (userId <= 0) {
             ParentControllerPair<Parent, LoginController> login = getParentControllerPair("login", "login.css");
             login.getController().setParentApplication(this);
+            login.getController().setLoginStage(stage);
             scene = new Scene(login.getParent(), 450, 400);
         } else {
             ParentControllerPair<Parent, HomeController> home = getParentControllerPair("home", "main.css");
+            home.getController().setHomeStage(stage);
             home.getController().setParentApplication(this);
             home.getController().init();
             scene = new Scene(home.getParent());
@@ -44,7 +46,7 @@ public class Application extends javafx.application.Application {
         stage.show();
     }
 
-    private void updateUserId() {
+    public void updateUserId() {
         String username = appProps.getProperty("username");
         String password = appProps.getProperty("password");
 
@@ -54,6 +56,7 @@ public class Application extends javafx.application.Application {
             userId = Integer.parseInt(HttpRequest.get(url).accept("text/plain").body());
         } catch (IOException e) {
             e.printStackTrace();
+            userId = -1;
         }
     }
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = {"http://127.0.0.1:8000"})
+@CrossOrigin(origins = {"*", "http://127.0.0.1:8000"})
 @Controller
 @RequestMapping("/api")
 public class MainController {
@@ -41,7 +41,7 @@ public class MainController {
                 return ResponseEntity.ok(devices);
             }
         }
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        return ResponseEntity.ok("");
     }
 
     @GetMapping("/fetchAllDevices/{userId}")

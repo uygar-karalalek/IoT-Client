@@ -67,17 +67,24 @@ public class DeviceModifyController extends Controller implements Initializable 
 
         this.sensors.addListener((ListChangeListener<? super ObservableSensor>) change -> {
             while (change.next()) {
-                change.getAddedSubList().forEach(sensorObservable -> {
-                    try {
-                        ParentControllerPair<Parent, DeviceSensorController> deviceSensor = Application.getParentControllerPair("device_sensor", "device_sensor.css");
-                        deviceSensor.getController().setParentApplication(getParentApplication());
-                        deviceSensor.getController().deviceUuid = device.getUuid();
-                        deviceSensor.getController().setObservableSensor(sensorObservable);
-                        sensorsFlow.getChildren().add(deviceSensor.getParent());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+                if (change.wasRemoved()) {
+                    change.getRemoved().forEach(observableSensor -> sensorsFlow.getChildren()
+                            .removeIf(node -> node.getUserData() != null && (Integer) node.getUserData() == observableSensor.getId()));
+                }
+                if (change.wasAdded()) {
+                    change.getAddedSubList().forEach(sensorObservable -> {
+                        try {
+                            ParentControllerPair<Parent, DeviceSensorController> deviceSensor = Application.getParentControllerPair("device_sensor", "device_sensor.css");
+                            deviceSensor.getController().setParentApplication(getParentApplication());
+                            deviceSensor.getController().deviceUuid = device.getUuid();
+                            deviceSensor.getController().setSensors(sensors);
+                            deviceSensor.getController().setObservableSensor(sensorObservable);
+                            sensorsFlow.getChildren().add(deviceSensor.getParent());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
             }
         });
         deviceRepository().getDeviceSensors(getUserId(), "name", device.getName()).forEach(sensor -> this.sensors.add(

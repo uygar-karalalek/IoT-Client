@@ -117,10 +117,15 @@ public class DeviceMySqlRepository implements DeviceRepository {
     public void removeByUuid(String uuid) {
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM device WHERE uuid=?");
-            preparedStatement.setString(1, uuid);
+
+            PreparedStatement deleteDeviceSensors = connection.prepareStatement("DELETE FROM sensor WHERE device_uuid=?");
+            deleteDeviceSensors.setString(1, uuid);
+            deleteDeviceSensors.execute();
+
+            PreparedStatement deleteSensor = connection.prepareStatement("DELETE FROM device WHERE uuid=?");
+            deleteSensor.setString(1, uuid);
+            deleteSensor.execute();
             connection.close();
-            preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

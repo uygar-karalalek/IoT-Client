@@ -39,6 +39,7 @@
             </HBox>
             <Button id="addDeviceBtn" mnemonicParsing="false" onAction="#onAddDevice" text="Add a device" />
             <Button id="removeDeviceBtn" mnemonicParsing="false" onAction="#onRemoveSelected" text="Remove Selected" />
+            <Button fx:id="logoutBtn" id="logoutBtn" mnemonicParsing="false" onAction="#onRemoveSelected" prefHeight="29.0" prefWidth="68.0" text="Logout" />
          </children>
       </HBox>
    </children>

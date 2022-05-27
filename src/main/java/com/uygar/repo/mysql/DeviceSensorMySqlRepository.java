@@ -9,6 +9,18 @@ import java.sql.SQLException;
 
 public class DeviceSensorMySqlRepository implements DeviceSensorRepository, Repository {
 
+   public void removeSensor(Integer id) {
+       try {
+           Connection connection = getConnection();
+           PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM sensor WHERE id=?");
+           preparedStatement.setInt(1, id);
+           preparedStatement.execute();
+           connection.close();
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+   }
+
     public void updateSensor(Integer id, Double newVal) {
         try {
             Connection connection = getConnection();

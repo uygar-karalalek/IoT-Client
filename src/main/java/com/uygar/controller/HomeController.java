@@ -30,11 +30,32 @@ public class HomeController extends Controller {
     public ScrollPane scrollPane;
     @FXML
     public FlowPane flow;
+    @FXML
+    public Button logoutBtn;
 
     ObservableList<ObservableDevice> devices = FXCollections.observableArrayList();
 
+    Stage homeStage;
+
     public void init() {
         searchField.setOnAction(this::inputChanged);
+
+        logoutBtn.setOnMouseClicked(mouseEvent -> {
+            try {
+                ParentControllerPair<Parent, LoginController> login = getParentControllerPair("login", "login.css");
+                Stage stage = new Stage();
+                login.getController().setParentApplication(getParentApplication());
+                login.getController().setLoginStage(stage);
+                Scene scene = new Scene(login.getParent(), 450, 400);
+                stage.setScene(scene);
+                stage.show();
+                homeStage.hide();
+                getParentApplication().getAppProps().putProperty("username", "");
+                getParentApplication().getAppProps().putProperty("password", "");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         devices.addListener((ListChangeListener<? super ObservableDevice>) change -> {
             while (change.next()) if (change.wasAdded()) change.getAddedSubList().forEach(observableDevice ->
@@ -51,11 +72,15 @@ public class HomeController extends Controller {
         });
     }
 
+    public void setHomeStage(Stage homeStage) {
+        this.homeStage = homeStage;
+    }
+
     @FXML
     public void onAddDevice() {
         try {
-            ParentControllerPair<Parent, DeviceAddController> parentControllerPair =
-                    getParentControllerPair("device_add", "device_add.css");
+            ParentControllerPair<Parent, DeviceAddController>
+                    parentControllerPair = getParentControllerPair("device_add", "device_add.css");
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

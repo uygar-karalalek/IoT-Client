@@ -10,3 +10,17 @@
     -fx-font-size: 16px;
     -fx-text-fill: white;
 }
+
+#removeBtn {
+    -fx-background-color: radial-gradient(radius 200%, #9f5058, #d07b85);
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 0.4em;
+    -fx-background-radius: 0.4em;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bolder;
+}
+
+#removeBtn:hover {
+    -fx-background-color: radial-gradient(radius 200%, #b7303b, #e0bbbe);
+}
